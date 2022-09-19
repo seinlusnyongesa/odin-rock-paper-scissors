@@ -1,5 +1,13 @@
+const weapons = document.querySelectorAll("button");
+
+weapons.forEach((child) => {
+  child.addEventListener("click", (e) => {});
+});
+
+//possible selection from computer paspective
 const selection = ["rock", "paper", "scissors"];
 
+//what wins against what ?
 const winning = { scissors: "paper", rock: "scissors", paper: "rock" };
 
 function getComputerChoice() {
@@ -28,16 +36,16 @@ function playRound(playerSelection, computerSelection) {
 
 function game() {
   const score = { user: 0, computer: 0, draw: 0 };
-  for (let i = 0; i < 5; i++) {
-    let winner = playRound(getPlayerChoice(), getComputerChoice());
-    if (winner === "user") {
-      score.user++;
-    } else if (winner === "computer") {
-      score.computer++;
-    } else if (winner === "draw") {
-      score.draw++;
-    }
-  }
+  // for (let i = 0; i < 5; i++) {
+  //   let winner = playRound(getPlayerChoice(), getComputerChoice());
+  //   if (winner === "user") {
+  //     score.user++;
+  //   } else if (winner === "computer") {
+  //     score.computer++;
+  //   } else if (winner === "draw") {
+  //     score.draw++;
+  //   }
+  // }
   return score;
 }
 console.log(game());

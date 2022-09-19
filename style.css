@@ -1,0 +1,33 @@
+*,
+body,
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.weapon button {
+  margin: 0.5em;
+  width: 8em;
+  height: 8em;
+  border-radius: 0.5em;
+  border: none;
+  box-shadow: 8px 8px 8px #cac7c7;
+  cursor: pointer;
+}
+
+.score {
+  display: flex;
+  margin: 2em auto;
+  font-size: 24px;
+  gap: 2em;
+}
