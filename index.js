@@ -16,15 +16,28 @@ function getPlayerChoice() {
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
-    console.log("draw");
-    return;
+    return "draw";
   }
 
   if (winning[playerSelection] === computerSelection) {
-    console.log(`you win ${playerSelection} beats ${computerSelection}`);
+    return "user";
   } else {
-    console.log(`you lose ${computerSelection} beats ${playerSelection}`);
+    return "computer";
   }
 }
 
-playRound(getPlayerChoice(), getComputerChoice());
+function game() {
+  const score = { user: 0, computer: 0, draw: 0 };
+  for (let i = 0; i < 5; i++) {
+    let winner = playRound(getPlayerChoice(), getComputerChoice());
+    if (winner === "user") {
+      score.user++;
+    } else if (winner === "computer") {
+      score.computer++;
+    } else if (winner === "draw") {
+      score.draw++;
+    }
+  }
+  return score;
+}
+console.log(game());
