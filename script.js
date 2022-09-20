@@ -2,10 +2,22 @@ const weapons = document.querySelectorAll("button");
 const userUI = document.querySelector(".playerScore");
 const computerUI = document.querySelector(".computerScore");
 const drawUI = document.querySelector(".draw");
+const whoWonARound = document.querySelector(".whoWon");
 
 weapons.forEach((child) => {
   child.addEventListener("click", (e) => {
     const scores = myGame(e);
+    if (scores.winner === "computer") {
+      whoWonARound.textContent = `You Lost, ${scores.computerChoice} beats ${scores.playerChoice}`;
+    }
+
+    if (scores.winner === "user") {
+      whoWonARound.textContent = `You Won, ${scores.playerChoice} beats ${scores.computerChoice}`;
+    }
+
+    if (scores.winner === "draw") {
+      whoWonARound.textContent = `You  Draw, ${scores.playerChoice} and ${scores.computerChoice} draws `;
+    }
     userUI.textContent = scores.score.user;
     computerUI.textContent = scores.score.computer;
     drawUI.textContent = scores.score.draw;
@@ -53,7 +65,7 @@ function game() {
       score["computer"]++;
     }
 
-    return { score, winner };
+    return { score, winner, playerChoice, computerChoice };
   }
 
   return roundWinner;

@@ -15,6 +15,15 @@ html {
   flex-direction: column;
 }
 
+.container > h1 {
+  font-size: 3rem;
+  margin: 1em auto;
+}
+
+.container > h2 {
+  margin: 1em auto;
+}
+
 .weapon button {
   margin: 0.5em;
   width: 8em;
@@ -27,7 +36,20 @@ html {
 
 .score {
   display: flex;
-  margin: 2em auto;
+  margin: 1em auto;
   font-size: 24px;
   gap: 2em;
+}
+
+.whoWon {
+  font-size: 36px;
+  margin: 1em auto;
+  text-align: center;
+}
+
+.scores {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
