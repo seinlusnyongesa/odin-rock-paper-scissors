@@ -1,3 +1,4 @@
+// get all the relevant elements
 const weaponContainer = document.querySelector(".weapon");
 const weapons = document.querySelectorAll("button");
 const scoreContainer = document.querySelector(".score");
@@ -7,14 +8,17 @@ const computerUI = document.querySelector(".computerScore");
 const drawUI = document.querySelector(".draw");
 const whoWonARound = document.querySelector(".whoWon");
 
+// a new game button, to be used when the game is finished
 const newGameBtn = document.createElement("button");
 newGameBtn.classList.add("new-game");
 newGameBtn.innerText = "play again";
 
+// add a click event listener to the new game button
 newGameBtn.addEventListener("click", (e) => {
   window.location.reload();
 });
 
+// listen for clicks on our weapons, these are either rock , paper or scissors
 weapons.forEach((child) => {
   child.addEventListener("click", (e) => {
     const scores = myGame(e);
@@ -35,6 +39,7 @@ weapons.forEach((child) => {
     computerUI.textContent = scores.score.computer;
     drawUI.textContent = scores.score.draw;
 
+    //check whether computer won the overall game and finish it
     if (scores.score.computer === 5) {
       weapons.forEach((child) => {
         weaponContainer.removeChild(child);
@@ -43,6 +48,8 @@ weapons.forEach((child) => {
       scoreContainer.remove();
       scoresContainer.appendChild(newGameBtn);
     }
+
+    // check whether the user won the overall game and finish it
     if (scores.score.user === 5) {
       weapons.forEach((child) => {
         weaponContainer.removeChild(child);
