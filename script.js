@@ -1,8 +1,14 @@
 const weapons = document.querySelectorAll("button");
+const userUI = document.querySelector(".playerScore");
+const computerUI = document.querySelector(".computerScore");
+const drawUI = document.querySelector(".draw");
 
 weapons.forEach((child) => {
   child.addEventListener("click", (e) => {
     const scores = myGame(e);
+    userUI.textContent = scores.score.user;
+    computerUI.textContent = scores.score.computer;
+    drawUI.textContent = scores.score.draw;
     console.log(scores);
   });
 });
@@ -47,7 +53,7 @@ function game() {
       score["computer"]++;
     }
 
-    return score;
+    return { score, winner };
   }
 
   return roundWinner;
