@@ -1,12 +1,25 @@
+const weaponContainer = document.querySelector(".weapon");
 const weapons = document.querySelectorAll("button");
+const scoreContainer = document.querySelector(".score");
+const scoresContainer = document.querySelector(".scores");
 const userUI = document.querySelector(".playerScore");
 const computerUI = document.querySelector(".computerScore");
 const drawUI = document.querySelector(".draw");
 const whoWonARound = document.querySelector(".whoWon");
 
+const newGameBtn = document.createElement("button");
+newGameBtn.classList.add("new-game");
+newGameBtn.innerText = "play again";
+
+newGameBtn.addEventListener("click", (e) => {
+  window.location.reload();
+});
+
 weapons.forEach((child) => {
   child.addEventListener("click", (e) => {
     const scores = myGame(e);
+
+    //check winner at each round
     if (scores.winner === "computer") {
       whoWonARound.textContent = `You Lost, ${scores.computerChoice} beats ${scores.playerChoice}`;
     }
@@ -21,7 +34,24 @@ weapons.forEach((child) => {
     userUI.textContent = scores.score.user;
     computerUI.textContent = scores.score.computer;
     drawUI.textContent = scores.score.draw;
-    console.log(scores);
+
+    if (scores.score.computer === 5) {
+      weapons.forEach((child) => {
+        weaponContainer.removeChild(child);
+      });
+      whoWonARound.textContent = "You Lost the Game, play again ?";
+      scoreContainer.remove();
+      scoresContainer.appendChild(newGameBtn);
+    }
+    if (scores.score.user === 5) {
+      weapons.forEach((child) => {
+        weaponContainer.removeChild(child);
+      });
+      scoreContainer.remove();
+      scoresContainer.appendChild(newGameBtn);
+      whoWonARound.textContent =
+        "Congratulations, You Won the Game , play again ?";
+    }
   });
 });
 
@@ -41,6 +71,8 @@ function getPlayerChoice(myChoice) {
 
   return choice;
 }
+
+// get the winner of a single round
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {

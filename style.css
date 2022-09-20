@@ -53,3 +53,10 @@ html {
   align-items: center;
   flex-direction: column;
 }
+
+.new-game {
+  padding: 0.8em 1.5em;
+  border-radius: 0.5em;
+  border: none;
+  cursor: pointer;
+}
