@@ -1,7 +1,10 @@
 const weapons = document.querySelectorAll("button");
 
 weapons.forEach((child) => {
-  child.addEventListener("click", (e) => {});
+  child.addEventListener("click", (e) => {
+    const scores = myGame(e);
+    console.log(scores);
+  });
 });
 
 //possible selection from computer paspective
@@ -15,37 +18,40 @@ function getComputerChoice() {
   return selection[selected];
 }
 
-function getPlayerChoice() {
-  let choice = prompt("Enter your choice either, rock, paper or scissors");
-  let choiceToLowercase = choice.toLowerCase();
+function getPlayerChoice(myChoice) {
+  let choice = myChoice.toLowerCase();
 
-  return choiceToLowercase;
+  return choice;
 }
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
     return "draw";
   }
+  if (winning[playerSelection] === computerSelection) return "user";
 
-  if (winning[playerSelection] === computerSelection) {
-    return "user";
-  } else {
-    return "computer";
-  }
+  if (winning[computerSelection] === playerSelection) return "computer";
 }
 
 function game() {
   const score = { user: 0, computer: 0, draw: 0 };
-  // for (let i = 0; i < 5; i++) {
-  //   let winner = playRound(getPlayerChoice(), getComputerChoice());
-  //   if (winner === "user") {
-  //     score.user++;
-  //   } else if (winner === "computer") {
-  //     score.computer++;
-  //   } else if (winner === "draw") {
-  //     score.draw++;
-  //   }
-  // }
-  return score;
+  function roundWinner(e) {
+    const playerChoice = getPlayerChoice(e.target.id);
+    const computerChoice = getComputerChoice();
+    const winner = playRound(playerChoice, computerChoice);
+    if (winner === "user") {
+      score["user"]++;
+    } else if (winner === "draw") {
+      score["draw"]++;
+    } else if (winner === "computer") {
+      score["computer"]++;
+    }
+
+    return score;
+  }
+
+  return roundWinner;
 }
-console.log(game());
+
+// create a closure to keep track of the score
+const myGame = game();
